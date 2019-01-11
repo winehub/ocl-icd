@@ -170,6 +170,22 @@ AS_IF([test x"$OCL_ICD_VENDORDIR" = x"/etc/OpenCL/vendors" ], [
   AC_MSG_NOTICE([using an unofficial custom default vendors directory ($OCL_ICD_VENDORDIR)])
 ])
 
+# --enable-custom-vendordir2
+AC_ARG_ENABLE([custom-vendordir2],
+  [AS_HELP_STRING([--enable-custom-vendordir2],
+                  [ additional path for .icd files])],
+  [AS_CASE(["$enableval"],
+    [yes], [OCL_ICD_VENDORDIR2="$sysconfdir/OpenCL/vendors"],
+    [no], [OCL_ICD_VENDORDIR2='/etc/OpenCL/vendors'],
+    [OCL_ICD_VENDORDIR2=$enableval])],
+  [OCL_ICD_VENDORDIR2=/etc/OpenCL/vendors])
+AC_SUBST([OCL_ICD_VENDORDIR2])
+
+AS_IF([test x"$OCL_ICD_VENDORDIR2" = x"/etc/OpenCL/vendors" ], [
+  AC_MSG_NOTICE([using the official default vendors directory for additional directory ($OCL_ICD_VENDORDIR2)])
+], [
+  AC_MSG_NOTICE([using an unofficial vendors directory for additional ($OCL_ICD_VENDORDIR2)])
+])
 # always use versionned symbols (check required for MacOSX)
 AM_CONDITIONAL([USE_MAP], [true])
 

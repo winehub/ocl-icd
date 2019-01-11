@@ -588,6 +588,15 @@ static void __initClIcd( void ) {
   } else {
     debug(D_DUMP, "OPENCL_VENDOR_PATH set to '%s', using it", vendor_path);
   }
+  for(int i=0; i<2;i++) {
+	  if (i==0) {
+		vendor_path=ETC_OPENCL_VENDORS;
+		debug(D_DUMP, "ETC_OPENCL_VENDORS set to '%s', using it", vendor_path);
+	  } else {
+		vendor_path=ETC_OPENCL_VENDORS2;
+		debug(D_DUMP, "ETC_OPENCL_VENDORS2 set to '%s', using it", vendor_path);
+	  };
+
   if (! dir_path || dir_path[0]==0) {
     dir_path=vendor_path;
     debug(D_DUMP, "OCL_ICD_VENDORS empty or not defined, using vendors path '%s'", dir_path);
@@ -671,6 +680,7 @@ static void __initClIcd( void ) {
   }
   if (dir != NULL){
     closedir(dir);
+  }
   }
   return;
 }
